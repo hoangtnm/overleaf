@@ -55,18 +55,19 @@ This repository does not contain any code. It acts a wrapper and toolkit for man
 
 ## Overleaf Docker Image
 
-This repo contains two dockerfiles, `Dockerfile-base`, which builds the
-`sharelatex/sharelatex-base` image, and `Dockerfile` which builds the
-`sharelatex/sharelatex` (or "community") image.
+This repo contains three dockerfiles:
+
+- `Dockerfile-base`, which builds the `sharelatex/sharelatex-base` image.
+- `Dockerfile`, which builds the`sharelatex/sharelatex` (or "community") image.
+- `Dockerfile-full`, which builds the`hoangtnm/sharelatex` image and extends the image with full TeX Live packages.
 
 The Base image generally contains the basic dependencies like `wget` and
 `aspell`, plus `texlive`. We split this out because it's a pretty heavy set of
 dependencies, and it's nice to not have to rebuild all of that every time.
 
-The `sharelatex/sharelatex` image extends the base image and adds the actual Overleaf code
-and services.
+The `sharelatex/sharelatex` image extends the base image and adds the actual Overleaf code and services.
 
-Use `make build-base` and `make build-community` to build these images.
+Use `make build-base`, `make build-community` and `make build-community-full` to build these images.
 
 We use the [Phusion base-image](https://github.com/phusion/baseimage-docker)
 (which is extended by our `base` image) to provide us with a VM-like container

@@ -2,7 +2,7 @@
 
 SHARELATEX_BASE_TAG := sharelatex/sharelatex-base
 SHARELATEX_TAG := sharelatex/sharelatex
-SHARELATEX_FULL_TAG := hoangtnm/sharelatex-full
+SHARELATEX_FULL_TAG := hoangtnm/sharelatex
 
 build-base:
 	docker build -f Dockerfile-base -t  $(SHARELATEX_BASE_TAG) .

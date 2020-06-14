@@ -2,7 +2,7 @@ ARG SHARELATEX_TAG=sharelatex/sharelatex:latest
 FROM $SHARELATEX_TAG
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3-dev python3-pip \
+    python3-minimal python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install pygments

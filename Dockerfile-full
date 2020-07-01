@@ -9,3 +9,17 @@ RUN pip3 install pygments
 
 RUN tlmgr update --self && \
     tlmgr install scheme-full
+
+# Install system-wide fonts
+WORKDIR /usr/share/fonts
+
+COPY fonts /usr/share/fonts
+
+RUN apt-get update && apt-get install -y \
+    fonts-firacode fonts-roboto fonts-open-sans \
+    && git clone --depth 1 https://github.com/adobe-fonts/source-serif-pro.git \
+    && git clone --depth 1 https://github.com/adobe-fonts/source-sans-pro.git \
+    && git clone --depth 1 https://github.com/adobe-fonts/source-code-pro.git \
+    && mkdir adobe && cp -r source*pro/OTF/* adobe && rm -r source*pro \
+    && rm -rf /var/lib/apt/lists/* \
+    && fc-cache -v

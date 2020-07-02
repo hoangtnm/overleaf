@@ -17,6 +17,7 @@ COPY ${baseDir}/install_fonts.sh .
 
 RUN apt-get update && apt-get install -y \
     fonts-firacode fonts-roboto fonts-open-sans \
+    && rm -rf /var/lib/apt/lists/* \
     && chmod 700 install_fonts.sh \
     && ./install_fonts.sh \
     && rm install_fonts.sh

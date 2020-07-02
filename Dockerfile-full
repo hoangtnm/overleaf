@@ -13,13 +13,10 @@ RUN tlmgr update --self && \
 # Install system-wide fonts
 WORKDIR /usr/share/fonts
 
-COPY fonts /usr/share/fonts
+COPY ${baseDir}/install_fonts.sh .
 
 RUN apt-get update && apt-get install -y \
     fonts-firacode fonts-roboto fonts-open-sans \
-    && git clone --depth 1 https://github.com/adobe-fonts/source-serif-pro.git \
-    && git clone --depth 1 https://github.com/adobe-fonts/source-sans-pro.git \
-    && git clone --depth 1 https://github.com/adobe-fonts/source-code-pro.git \
-    && mkdir adobe && cp -r source*pro/OTF/* adobe && rm -r source*pro \
-    && rm -rf /var/lib/apt/lists/* \
-    && fc-cache -v
+    && chmod 700 install_fonts.sh \
+    && ./install_fonts.sh \
+    && rm install_fonts.sh

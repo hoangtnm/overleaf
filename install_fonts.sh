@@ -19,4 +19,7 @@ do
     find $folder -mindepth 1 -maxdepth 1 ! -name '*.otf' -exec rm -rf {} \;
 done
 
-fc-cache -f
+# Rebuild cached list of fonts
+# See details at
+# https://wiki.debian.org/Fonts
+fc-cache -fv

@@ -3,12 +3,10 @@ FROM $SHARELATEX_TAG
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-minimal python3-pip \
+    && pip3 install --no-cache-dir pygments \
+    && tlmgr update --self \
+    && tlmgr install scheme-full \
     && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install pygments
-
-RUN tlmgr update --self && \
-    tlmgr install scheme-full
 
 # Install system-wide fonts
 WORKDIR /usr/share/fonts

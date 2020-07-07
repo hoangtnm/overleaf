@@ -3,7 +3,7 @@ FROM $SHARELATEX_TAG
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-minimal python3-pip \
-    && python3 -m pip install --no-cache-dir pygments \
+    && python3 -m pip --no-cache-dir install pygments \
     && tlmgr update --self \
     && tlmgr install scheme-full \
     && rm -rf /var/lib/apt/lists/*

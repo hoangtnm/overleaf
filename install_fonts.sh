@@ -18,6 +18,13 @@ for dir in source*pro; do
   # Keep only OTF font files
   mv "${dir}/OTF/"* "${dir}"
   find "${dir}" -mindepth 1 -maxdepth 1 ! -name '*.otf' -exec rm -rf {} \;
+
+  if [[ "${dir}" = 'source-sans-pro' ]]; then
+      for file in "${dir}"/*; do
+          new_file=$(echo "${file}" | sed 's/3/Pro/')
+          mv "${file}" "${new_file}" 
+      done
+  fi
 done
 
 # Rebuild cached list of fonts

@@ -13,7 +13,7 @@ build-community:
 
 
 build-community-full:
-	docker build --build-arg SHARELATEX_TAG=$(SHARELATEX_TAG) -f Dockerfile-full --no-cache -t $(SHARELATEX_FULL_TAG) .
+	docker build --build-arg SHARELATEX_TAG=$(SHARELATEX_TAG) -f Dockerfile-full -t $(SHARELATEX_FULL_TAG) .
 
 
 PHONY: build-base build-community build-community-full

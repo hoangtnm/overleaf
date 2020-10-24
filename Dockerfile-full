@@ -9,8 +9,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install system-wide fonts
-WORKDIR /usr/share/fonts
-
 COPY ${baseDir}/install_fonts.sh .
 
 RUN apt-get update && apt-get install -y \

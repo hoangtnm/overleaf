@@ -213,7 +213,7 @@ settings =
 		collaborators: -1
 		dropbox: true
 		versioning: true
-		compileTimeout: 180
+		compileTimeout: parseInt(process.env["COMPILE_TIMEOUT"] or 180, 10)
 		compileGroup: "standard"
 		trackChanges: true
 		templates: true
@@ -283,7 +283,7 @@ if process.env["SHARELATEX_EMAIL_FROM_ADDRESS"]?
 			ignoreTLS: parse(process.env["SHARELATEX_EMAIL_SMTP_IGNORE_TLS"])
 
 		textEncoding:  process.env["SHARELATEX_EMAIL_TEXT_ENCODING"]
-		templates:
+		template:
 			customFooter: process.env["SHARELATEX_CUSTOM_EMAIL_FOOTER"]
 
 	if process.env["SHARELATEX_EMAIL_SMTP_USER"]? or process.env["SHARELATEX_EMAIL_SMTP_PASS"]?

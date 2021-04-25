@@ -148,6 +148,8 @@ settings =
 		compilesDir:  Path.join(DATA_DIR, "compiles")
 		# Where to cache downloaded URLs for the CLSI
 		clsiCacheDir: Path.join(DATA_DIR, "cache")
+		# Where to write the output files to disk after running LaTeX
+		outputDir:  Path.join(DATA_DIR, "output")
 
 	# Server Config
 	# -------------
@@ -285,6 +287,8 @@ if process.env["SHARELATEX_EMAIL_FROM_ADDRESS"]?
 			port: process.env["SHARELATEX_EMAIL_SMTP_PORT"],
 			secure: parse(process.env["SHARELATEX_EMAIL_SMTP_SECURE"])
 			ignoreTLS: parse(process.env["SHARELATEX_EMAIL_SMTP_IGNORE_TLS"])
+			name: process.env["SHARELATEX_EMAIL_SMTP_NAME"]
+			logger: process.env["SHARELATEX_EMAIL_SMTP_LOGGER"] == 'true'
 
 		textEncoding:  process.env["SHARELATEX_EMAIL_TEXT_ENCODING"]
 		template:
@@ -424,7 +428,7 @@ if process.env["SHARELATEX_LDAP_URL"]
 
 
 if process.env["SHARELATEX_SAML_ENTRYPOINT"]
-	# NOTE: see https://github.com/bergie/passport-saml/blob/master/README.md for docs of `server` options
+	# NOTE: see https://github.com/node-saml/passport-saml/blob/master/README.md for docs of `server` options
 	settings.externalAuth = true
 	settings.saml =
 		updateUserDetailsOnLogin: process.env["SHARELATEX_SAML_UPDATE_USER_DETAILS_ON_LOGIN"] == 'true'
@@ -438,6 +442,7 @@ if process.env["SHARELATEX_SAML_ENTRYPOINT"]
 			callbackUrl: process.env["SHARELATEX_SAML_CALLBACK_URL"]
 			issuer: process.env["SHARELATEX_SAML_ISSUER"]
 			decryptionPvk: process.env["SHARELATEX_SAML_DECRYPTION_PVK"]
+			decryptionCert: process.env["SHARELATEX_SAML_DECRYPTION_CERT"]
 			signatureAlgorithm: process.env["SHARELATEX_SAML_SIGNATURE_ALGORITHM"]
 			identifierFormat: process.env["SHARELATEX_SAML_IDENTIFIER_FORMAT"]
 			attributeConsumingServiceIndex: process.env["SHARELATEX_SAML_ATTRIBUTE_CONSUMING_SERVICE_INDEX"]
@@ -497,7 +502,7 @@ if process.env["SHARELATEX_SAML_ENTRYPOINT"]
 			)
 
 	# SHARELATEX_SAML_CERT cannot be empty
-	# https://github.com/bergie/passport-saml/commit/f6b1c885c0717f1083c664345556b535f217c102
+	# https://github.com/node-saml/passport-saml/commit/f6b1c885c0717f1083c664345556b535f217c102
 	if process.env["SHARELATEX_SAML_CERT"]
 		settings.saml.server.cert = process.env["SHARELATEX_SAML_CERT"]
 		settings.saml.server.privateCert = process.env["SHARELATEX_SAML_PRIVATE_CERT"]
@@ -569,4 +574,3 @@ https = require('https')
 https.globalAgent.maxSockets = 300
 
 module.exports = settings
-
